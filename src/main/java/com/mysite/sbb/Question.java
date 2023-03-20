@@ -5,20 +5,19 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-// question 테이블이 생김
 @Getter
 @Setter
 @Entity
 public class Question {
-    @Id // PRIMARY KEY
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
-    private Integer id; // INT id
+    private Integer id;
 
-    @Column(length = 200) // VARCHAR(200)
+    @Column(length = 200)
     private String subject;
 
-    @Column(columnDefinition = "TEXT") // TEXT
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    private LocalDateTime createDate; // DATETIME
+    private LocalDateTime createDate;
 }
