@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
     @GetMapping("/sbb")
-    @ResponseBody
+    @ResponseBody //타임리프
     public String index() {
         return "안녕하세요 sbb에 오신것을 환영합니다";
     }
