@@ -38,7 +38,7 @@ class SbbApplicationTests {
     @Test
     @DisplayName("FindAll")
     void t002() {
-        List<Question> all = findAll();
+        List<Question> all = questionRepository.findAll();
         assertEquals(2, all.size());
 
         Question q = all.get(0);
