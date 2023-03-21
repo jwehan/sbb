@@ -2,6 +2,7 @@ package com.mysite.sbb;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,6 +43,41 @@ class SbbApplicationTests {
         assertEquals(2, all.size());
 
         Question q = all.get(0);
+        assertEquals("sbb가 무엇인가요?", q.getSubject());
+    }
+
+    @Test
+    @DisplayName("findById")
+    void t003() {
+        Optional<Question> oq = questionRepository.findById(1);
+
+        if (oq.isPresent()) {
+            Question q = oq.get();
+            assertEquals("sbb가 무엇인가요?", q.getSubject());
+        }
+    }
+
+    @Test
+    @DisplayName("findBySubject")
+    void t004() {
+        Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+        assertEquals(1, q.getId());
+    }
+
+    @Test
+    @DisplayName("findBySubjectAndContent")
+    void t005() {
+        Question q = questionRepository.findBySubjectAndContent(
+                "sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다."
+        );
+        assertEquals(1, q.getId());
+    }
+
+    @Test
+    @DisplayName("findBySubjectLike")
+    void t006() {
+        List<Question> qList = questionRepository.findBySubjectLike("sbb%");
+        Question q = qList.get(0);
         assertEquals("sbb가 무엇인가요?", q.getSubject());
     }
 }
