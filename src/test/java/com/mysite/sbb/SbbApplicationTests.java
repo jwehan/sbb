@@ -17,19 +17,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class SbbApplicationTests {
-
     @Autowired
     private QuestionRepository questionRepository;
-
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @BeforeEach
     void beforeEach(){
+        answerRepository.deleteAll();
+        answerRepository.clearAutoIncrement();
 
         questionRepository.deleteAll();
         questionRepository.clearAutoIncrement();
 
+
         //초기값 세팅!
         Question q1 = new Question();
+
+
         q1.setSubject("sbb가 무엇인가요?");
         q1.setContent("sbb에 대해서 알고 싶습니다.");
         q1.setCreateDate(LocalDateTime.now());
@@ -139,8 +144,6 @@ class SbbApplicationTests {
         assertEquals(1, this.questionRepository.count());
     }
 
-    @Autowired
-    private AnswerRepository answerRepository;
 
     @Test
     @DisplayName("답변 데이터 생성 , 저장")
