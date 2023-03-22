@@ -6,5 +6,21 @@
 </head>
 <body>
 <h2>Hello Templat</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="q: ${questionList}">
+        <td th:text="q.id"></td>
+        <td th:text="q.id"></td>
+        <td th:text="q.id"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
