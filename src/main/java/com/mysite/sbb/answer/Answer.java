@@ -1,28 +1,35 @@
 package com.mysite.sbb.answer;
 
 import com.mysite.sbb.question.Question;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.mysite.sbb.question.QuestionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter
-@Setter
-@Entity
-@ToString
-public class Answer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
-    private Integer id;
+@Controller
+@RequiredArgsConstructor
+public class QuestionController {
+    private final QuestionService questionService;
 
-    @Column(columnDefinition = "TEXT")
-    private String content;
+    @GetMapping("/question/list")
+    public String list(Model model) {
+        List<Question> questionList = questionService.getList();
 
-    private LocalDateTime createDate;
+        model.addAttribute("questionList", questionList);
 
-    @ManyToOne
-    @ToString.Exclude
-    private Question question;
+        return "question_list";
+    }
+
+    @GetMapping("/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id) {
+        Question question = questionService.getQuestion(id);
+
+        model.addAttribute("question", question);
+
+        return "question_detail";
+    }
 }
